@@ -1,5 +1,7 @@
 {
   "name": "pomodore-todo",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

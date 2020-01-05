@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Aufgaben
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngFor="let task of tasks">
+      <h1 style="text-align: center; color: black">{{ task }}</h1>
+    </ion-card>
+<div align="center">
+    <button (click)="addNewTaskUI()" class="buttonCircle">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </div>
+</ion-content>
