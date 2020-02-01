@@ -9,10 +9,20 @@
 <ion-content>
     <ion-card *ngFor="let task of tasks">
       <h1 style="text-align: center; color: black">{{ task }}</h1>
+      <ion-buttons>
+        <ion-button style="margin: 3%" size="small" fill="outline" (click)='deleteTask(task)'><ion-icon name="trash" slot="icon-only"></ion-icon></ion-button>
+      </ion-buttons>
     </ion-card>
 <div align="center">
     <button (click)="addNewTaskUI()" class="buttonCircle">
       <ion-icon name="add"></ion-icon>
     </button>
   </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="play"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

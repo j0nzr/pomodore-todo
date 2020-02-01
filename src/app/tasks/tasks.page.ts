@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { IonicStorageModule } from '@ionic/storage';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tasks',
@@ -9,13 +9,41 @@ import { IonicStorageModule } from '@ionic/storage';
 })
 export class TasksPage {
 
-  constructor(public alertCtrl: AlertController) {
+  constructor(public alertCtrl: AlertController, public store: Storage) {
+    //console.log(store.get("data"))
+    this.setTaskList();
   }
 
   public tasks: string[] = [];
 
-  addNewTask(task: string){
+  async deleteTask(taskname: string){
+    if(this.tasks.length == 1){
+      this.tasks = [];
+    }
+    for(let task of this.tasks){
+      if(task == taskname){
+        let index = this.tasks.indexOf(task);
+        console.log(index);
+        this.tasks = this.tasks.splice(index, 1);
+      }
+    }
+    this.store.set("data", this.tasks);
+  }
+
+  async setTaskList(){
+    //console.log(this.store.get("data"));
+    //console.log(typeof(this.store.get("data")));
+    //this.store.set("data", ["Jonas"]);
+    if(this.store.get("data")){
+      this.tasks = await this.store.get("data");
+    }
+  }
+
+  async addNewTask(task: string){
+    console.log(this.tasks);
     this.tasks.push(task);
+    this.store.set("data", this.tasks);
+    //console.log(await this.store.get("data"))
   }
 
   async addNewTaskUI(){
@@ -42,7 +70,8 @@ export class TasksPage {
         }
       ]
     });
-    await task.present();
+    await task.present().then();
+    
   }
 
 }
