@@ -34,8 +34,12 @@ export class TasksPage {
     //console.log(this.store.get("data"));
     //console.log(typeof(this.store.get("data")));
     //this.store.set("data", ["Jonas"]);
-    if(this.store.get("data")){
-      this.tasks = await this.store.get("data");
+    if(this.store.get("data") && typeof(this.store.get("data")) == "object"){
+      await this.store.get("data").then((data) => {
+        console.log(this.tasks);
+        this.tasks = data;
+      });
+      
     }
   }
 
